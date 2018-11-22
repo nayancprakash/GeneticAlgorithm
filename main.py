@@ -15,6 +15,9 @@ if __name__ == "__main__":
     height, width, depth = sourceImage.shape
     gen1 = Genesis.runGenesis(amountFittest, amountShapes, height, width)
     for species in gen1:
+        #print(species.getFitness(sourceImage))
         species.drawSpecies()
+        cv.imshow('Species', species.image)
+        cv.waitKey(0)
     cv.imshow('Source Image', sourceImage)
     cv.waitKey(0)
