@@ -5,5 +5,7 @@ import cv2 as cv
 from sys import argv
 
 if __name__ == "__main__":
+    print(argv[1])
     sourceImage = cv.imread(argv[1])
-    cv.imdisplay(sourceImage)
+    cv.imshow('Source Image', sourceImage)
+    cv.waitKey(0)
