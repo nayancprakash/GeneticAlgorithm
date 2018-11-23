@@ -29,7 +29,7 @@ if __name__ == "__main__":
     evolve = True
 
     cv.imshow("Source", sourceImage)
-    cv.waitKey(1)
+    cv.waitKey(0)
 
     while evolve:
         speciesFitness = calculateFitness(population, sourceImage)
@@ -41,6 +41,3 @@ if __name__ == "__main__":
         cv.imshow("Fittest Species", fittest.image)
         cv.waitKey(1)
         counter+= 1
-
-
-
