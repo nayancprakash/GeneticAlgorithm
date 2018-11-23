@@ -8,9 +8,12 @@ class Shapes:
     points = []
     color = []
 
-    def __init__(self, height, width):
+    def __init__(self, height, width, alphaToggle):
         polyOverflow = 75
-        self.alpha = random.randrange(0, 5)/10000
+        if alphaToggle:
+            self.alpha = 0
+        else:
+            self.alpha = random.randrange(0, 5)/10000
         pointsList = []
         for i in range(0, random.randint(3,6)):
             pointsList.append([random.randint(-polyOverflow,width+polyOverflow), random.randint(-polyOverflow,height+polyOverflow)])

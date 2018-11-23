@@ -18,10 +18,10 @@ def mutate(species,numChange):
 
     for i in range(len(species.shapes)):
         if i <numChange:
-            shapes.append(Shapes.Shapes(height, width))
+            shapes.append(Shapes.Shapes(height, width,False))
         else:
             shapes.append(species.shapes[i])
-    newSpecies = Species.Species(shapes, height, width)
+    newSpecies = Species.Species2(shapes, height, width)
 
     return newSpecies
 
