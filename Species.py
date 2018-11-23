@@ -8,6 +8,8 @@ class Species:
     def __init__(self, Shapes, height, width):
         self.shapes = Shapes;
         self.fitness = 0;
+        self.height = height
+        self.width = width
         self.image = numpy.zeros((height, width, 3))
 
     def drawSpecies(self):
@@ -15,14 +17,3 @@ class Species:
             self.image = shape.drawShape(self.image)
         return self.image
 
-
-    def getFitness(self, img):
-        fitness = 0
-        #print(self.image)
-        for y in range(self.image.shape[0]):
-            for x in range(self.image.shape[1]):
-                deltaB = abs(img[y][x][0] - self.image[y][x][0])/16
-                deltaG = abs(img[y][x][1] - self.image[y][x][1])/16
-                deltaR = abs(img[y][x][2] - self.image[y][x][2])/16
-                fitness += deltaB*deltaB + deltaG*deltaG + deltaR*deltaR
-        return fitness

@@ -1,10 +1,11 @@
 import Shapes
 import Species
 import Genesis
-# import naturalSelection
-# import crossover
-# import mutation
-import calculateFitness as cF
+
+from naturalSelection import naturalSelection
+from crossover import crossover
+from mutation import mutation
+from calculateFitness import calculateFitness
 
 import numpy
 import math
@@ -14,33 +15,32 @@ from sys import argv
 if __name__ == "__main__":
     # Parameters
     sourceImage = cv.imread(argv[1])
-    amountSpecies = 45
-    amountShapes = 50
-    amountFit =  math.factorial(amountSpecies) / (math.factorial(2)*math.factorial(amountSpecies-2))
-    mutationRate = 0.03
+    amountSpecies = 10
+    amountShapes = 75
+    #amountFit =  math.factorial(amountSpecies) / (math.factorial(2)*math.factorial(amountSpecies-2))
+    amountFit = 5
+    mutationRate = 3
+    mutationChange = round(amountShapes*0.1)
     height, width, depth = sourceImage.shape
 
-    # Testing
-    gen1 = Genesis.runGenesis(amountSpecies, amountShapes, height, width)
-    buff = cF.calculateFitness(gen1,sourceImage)
-    # for species in gen1:
-    #     species.drawSpecies()
-    #     cv.imshow('Species', species.image)
-    #     cv.waitKey(0)
-    # cv.imshow('Source Image', sourceImage)
-    # cv.waitKey(0)
+    population = Genesis.runGenesis(amountSpecies, amountShapes, height, width)
 
+    counter = 0
+    evolve = True
 
+    cv.imshow("Source", sourceImage)
+    cv.waitKey(1)
 
-    # population = Genesis.runGenesis(amountSpecies, amountShapes, height, width)
-    #
-    # evolve = True
-    # while evolve:
-    #
-    #     speciesFitness = cF.calculateFitness(population, sourceImage)
-    #     matingPool = naturalSelection(population,speciesFitness)
-    #     childPool = crossover(matingPool)
-    #     population = mutation(childPool)
+    while evolve:
+        speciesFitness = calculateFitness(population, sourceImage)
+        (matingPool,fittest) = naturalSelection(population,speciesFitness,amountFit)
+        childPool = crossover(matingPool)
+        population = mutation(childPool,mutationRate, mutationChange)
+
+        print("Generation: %i Fitness: %i" % (counter,fittest.fitness))
+        cv.imshow("Fittest Species", fittest.image)
+        cv.waitKey(1)
+        counter+= 1
 
 
 

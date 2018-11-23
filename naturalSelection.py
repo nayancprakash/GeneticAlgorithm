@@ -1,30 +1,16 @@
 import Species
-import crossover
-import mutation
 
+def naturalSelection(pop,popFit, amount):
+    mating = []
 
-def select (population, amount):
+    for species in pop:
+        if species.fitness <= popFit[amount-1]:
+            mating.append(species)
+            if species.fitness == popFit[0]:
+                fittest = species
 
-    populationFitness =[]*len(population)
-    matingPool = []*amount
+    return (mating,fittest)
 
-    i = 0
-    for species in population:
-        population[i] = species.getFitness()
-        i+=1
-
-    populationFitness.sort()
-
-    i = 0
-    for species in population:
-        if species.fitness >= populationFitness[amount]:
-            matingPool[i]=species
-            i+=1
-            # assume there wont be a tie
-
-
-
-    return child
 
 
 
