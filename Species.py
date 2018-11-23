@@ -18,6 +18,7 @@ class Species:
 
     def getFitness(self, img):
         fitness = 0
+        #print(self.image)
         for y in range(self.image.shape[0]):
             for x in range(self.image.shape[1]):
                 deltaB = abs(img[y][x][0] - self.image[y][x][0])/16

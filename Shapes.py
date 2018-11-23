@@ -9,7 +9,7 @@ class Shapes:
     color = []
 
     def __init__(self, height, width):
-        self.alpha = random.randrange(0, 8)/10000
+        self.alpha = random.randrange(0, 5)/10000
         pointsList = []
         for i in range(0, random.randint(3,6)):
             pointsList.append([random.randint(0,width+1), random.randint(0,height+1)])
