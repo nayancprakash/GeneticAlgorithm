@@ -29,7 +29,7 @@ if __name__ == "__main__":
     # cv.imshow("Source", sourceImage)
     # cv.waitKey(1)
 
-    parent = Species.Species(amountShapes, height, width,True)
+    parent = Species.Species(amountShapes, height, width,False)
     fitParent = calculateFitness(parent, sourceImage)
 
     while counter<120:
@@ -41,9 +41,9 @@ if __name__ == "__main__":
 
         #buff = (fitParent / 102586506) * 100
         print("Generation: %i  Fitness: %i" % (counter, fitParent))
-        # if counter %10 ==0:
-        #     cv.imshow("Parent", parent.image)
-        #     cv.waitKey(1)
+        if counter %10 ==0:
+            cv.imshow("Parent", parent.image)
+            cv.waitKey(1)
         counter += 1
 
     cv.imshow("Source", parent.image)
