@@ -20,8 +20,8 @@ if __name__ == "__main__":
     amountSpecies = 45
     amountShapes = 50
     amountFit = 10
-    mutationRate = 5
-    mutationChange = round(amountShapes*0.1)
+    mutationRate = 1
+    mutationChange = round(amountShapes*0.15)
     height, width, depth = sourceImage.shape
     maxErr = (((width*height*255)^2)*3)
 
@@ -62,7 +62,7 @@ if __name__ == "__main__":
         # end = time.time()
         # print(start-end)
 
-        print("Generation: %i Fitness: %f" % (counter,((maxErr-fittest.fitness)/maxErr)*100))
+        print("Generation: %i Fitness: %f" % (counter,fittest.fitness))
         # cv.imshow("Fittest Species", fittest.image)
         # cv.waitKey(1)
         counter+= 1
