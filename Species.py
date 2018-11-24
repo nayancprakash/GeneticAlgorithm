@@ -11,9 +11,14 @@ class Species:
         self.height = height
         self.width = width
         self.image = numpy.zeros((height, width, 3))
-
-    def drawSpecies(self):
         for shape in self.shapes:
             self.image = shape.drawShape(self.image)
-        return self.image
+
+    # def drawSpecies(self):
+    #     for shape in self.shapes:
+    #         self.image = shape.drawShape(self.image)
+    #     return self.image
+
+    def __del__(self):
+        pass
 

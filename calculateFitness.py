@@ -3,9 +3,10 @@ import random
 import numpy
 
 def calculateFitness(population, img):
-    speciesFit = []
+    speciesFit = [0]*len(population)
+    i = 0
     for species in population:
-        species.drawSpecies()
+        # species.drawSpecies()
         fitness = 0
         deltaB = img[:][:][0] - species.image[:][:][0]
         deltaG = img[:][:][1] - species.image[:][:][1]
@@ -19,7 +20,8 @@ def calculateFitness(population, img):
                 #deltaR = abs(img[y][x][2] - species.image[y][x][2])/16
                 #fitness += deltaB*deltaB + deltaG*deltaG + deltaR*deltaR
         species.fitness = fitness
-        speciesFit.append(fitness)
+        speciesFit[i]= fitness
         #print(fitness)
+        i+=1
     speciesFit.sort()
     return speciesFit

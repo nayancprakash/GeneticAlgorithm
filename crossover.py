@@ -3,7 +3,7 @@ import random
 
 
 def crossover(pop):
-    mating =[]
+    mating = []
 
     for i in range(len(pop)):
         for j in range(i,len(pop)):
@@ -13,7 +13,7 @@ def crossover(pop):
     return mating
 
 def cross(parent1, parent2):
-    height= parent1.height
+    height = parent1.height
     width = parent1.width
     shapes = []
 

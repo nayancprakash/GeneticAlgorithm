@@ -20,8 +20,6 @@ class Shapes:
     def drawShape(self, img):
         height, width, depth = img.shape
         overlay = numpy.zeros((height, width, 3))
-        #print('\n' + self.color)
         cv.fillPoly(overlay, [numpy.array(self.points)], (self.color[0], self.color[1], self.color[2]))
-        #cv.addWeighted(overlay, self.alpha, img, 1-self.alpha, 0.0, img)
         img = img*(1-self.alpha)+overlay*self.alpha
         return img
