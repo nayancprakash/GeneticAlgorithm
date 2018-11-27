@@ -5,6 +5,7 @@ import numpy
 def calculateFitness(population, img):
     speciesFit = [0]*len(population)
     i = 0
+    fittest = None
     for species in population:
         # species.drawSpecies()
         fitness = 0
@@ -20,8 +21,12 @@ def calculateFitness(population, img):
                 #deltaR = abs(img[y][x][2] - species.image[y][x][2])/16
                 #fitness += deltaB*deltaB + deltaG*deltaG + deltaR*deltaR
         species.fitness = fitness
-        speciesFit[i]= fitness
+        speciesFit[i] = fitness
+        if (i == 0):
+            fittest = species
+        elif (fittest.fitness > species.fitness):
+            fittest = species
         #print(fitness)
         i+=1
     speciesFit.sort()
-    return speciesFit
+    return speciesFit, fittest

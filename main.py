@@ -19,13 +19,14 @@ if __name__ == "__main__":
     sourceImage = cv.imread(argv[1])
     amountSpecies = 45
     amountShapes = 50
+    randAlpha = 5
     amountFit = 10
-    mutationRate = 1
+    mutationRate = 50
     mutationChange = round(amountShapes*0.15)
     height, width, depth = sourceImage.shape
     maxErr = (((width*height*255)^2)*3)
 
-    population = Genesis.runGenesis(amountSpecies, amountShapes, height, width)
+    population = Genesis.runGenesis(amountSpecies, amountShapes, height, width, randAlpha)
 
     counter = 0
     evolve = True
@@ -38,11 +39,11 @@ if __name__ == "__main__":
         speciesFitness = None
         speciesFitness = []
         # start = time.time()
-        speciesFitness = calculateFitness(population, sourceImage)
+        speciesFitness, fittest = calculateFitness(population, sourceImage)
         # end = time.time()
         # print(start-end)
 
-        matingPool =None
+        matingPool = None
         matingPool = []
         fittest = None
         # start = time.time()
@@ -70,6 +71,3 @@ if __name__ == "__main__":
     cv.imshow("Source", fittest.image)
     cv.waitKey(0)
     # tracker = SummaryTracker()
-
-
-
