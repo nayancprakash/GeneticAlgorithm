@@ -18,15 +18,16 @@ if __name__ == "__main__":
     # Parameters
     sourceImage = cv.imread(argv[1])
     amountSpecies = 45
-    amountShapes = 50
-    randAlpha = 5
-    amountFit = 10
-    mutationRate = 50
-    mutationChange = round(amountShapes*0.15)
+    amountShapes = 135
+    randAlpha = 5 # in percentage
+    amountFit = 5
+    mutationRate = 1 # in percentage
+    numVertices = 3
+    mutationAmount = 10 # in percentage
     height, width, depth = sourceImage.shape
     maxErr = (((width*height*255)^2)*3)
 
-    population = Genesis.runGenesis(amountSpecies, amountShapes, height, width, randAlpha)
+    population = Genesis.runGenesis(amountSpecies, amountShapes, height, width, randAlpha, numVertices)
 
     counter = 0
     evolve = True
@@ -34,7 +35,7 @@ if __name__ == "__main__":
     # cv.imshow("Source", sourceImage)
     # cv.waitKey(0)
     # tracker = SummaryTracker()
-    while counter<100:
+    while evolve:
 
         speciesFitness = None
         speciesFitness = []
@@ -42,30 +43,36 @@ if __name__ == "__main__":
         speciesFitness, fittest = calculateFitness(population, sourceImage)
         # end = time.time()
         # print(start-end)
-
-        matingPool = None
-        matingPool = []
-        fittest = None
-        # start = time.time()
-        (matingPool,fittest) = naturalSelection(population, speciesFitness, amountFit)
-        # end =time.time()
-        # print(start-end)
-        childPool = None
-        childPool =[]
-        # start=time.time()
-        childPool = crossover(matingPool)
-        # end = time.time()
-        # print(start-end)
-        population = None
-        population = []
-        # start = time.time()
-        population = mutation(childPool,mutationRate, mutationChange)
-        # end = time.time()
-        # print(start-end)
+        population = sorted(population, key=lambda x: x.fitness, reverse=True)
 
         print("Generation: %i Fitness: %f" % (counter,fittest.fitness))
-        # cv.imshow("Fittest Species", fittest.image)
-        # cv.waitKey(1)
+        cv.imshow("Fittest Species", population[0].image)
+        cv.waitKey(1)
+        # for species in population:
+        #     print(species.fitness)
+        #matingPool = None
+        #matingPool = []
+        #fittest = None
+        # start = time.time()
+        #(matingPool,fittest) = naturalSelection(population, speciesFitness, amountFit)
+        print(len(population))
+        population = naturalSelection(population, speciesFitness, amountFit)
+        print(len(population))
+        # end =time.time()
+        # print(start-end)
+        #childPool = None
+        #childPool =[]
+        # start=time.time()
+        #childPool = crossover(matingPool)
+        # end = time.time()
+        # print(start-end)
+        #population = None
+        #population = []
+        # start = time.time()
+        population = mutation(population, mutationRate, mutationAmount)
+        # end = time.time()
+        # print(start-end)
+
         counter+= 1
         # tracker.print_diff()
     cv.imshow("Source", fittest.image)

@@ -8,11 +8,17 @@ class Shapes:
     points = []
     color = []
 
-    def __init__(self, height, width, randAlpha):
-        self.alpha = random.randrange(0, randAlpha)/10000
+    def __init__(self, height, width, randAlpha, numVertices):
+        #self.alpha = random.random() * random.random()
+        self.alpha = 0.02
         pointsList = []
-        for i in range(0, random.randint(3,6)):
-            pointsList.append([random.randint(0,width+1), random.randint(0,height+1)])
+        xAnchor = random.randint(0,width+1)
+        yAnchor = random.randint(0,height+1)
+        for i in range(0, numVertices):
+            if i == 0:
+                pointsList.append([xAnchor, yAnchor])
+            else:
+                pointsList.append([xAnchor+random.randint(int(-width/5),int(width/5)), yAnchor+random.randint(int(-height/5),int(height/5))])
         self.points = pointsList
         # Given in BGR Form
         self.color = [random.randint(0,256), random.randint(0,256), random.randint(0,256)]
