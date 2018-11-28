@@ -8,6 +8,7 @@ from mutation import mutation
 from calculateFitness import calculateFitness
 
 # import numpy
+import random
 # import math
 # from pympler.tracker import SummaryTracker
 # import time
@@ -19,9 +20,9 @@ if __name__ == "__main__":
     sourceImage = cv.imread(argv[1])
     amountSpecies = 45
     amountShapes = 50
-    randAlpha = 5
+    randAlpha = random.randint(0,8)
     amountFit = 10
-    mutationRate = 50
+    mutationRate = 100
     mutationChange = round(amountShapes*0.15)
     height, width, depth = sourceImage.shape
     maxErr = (((width*height*255)^2)*3)
@@ -60,12 +61,13 @@ if __name__ == "__main__":
         population = []
         # start = time.time()
         population = mutation(childPool,mutationRate, mutationChange)
+        population.append(fittest)
         # end = time.time()
         # print(start-end)
 
         print("Generation: %i Fitness: %f" % (counter,fittest.fitness))
-        # cv.imshow("Fittest Species", fittest.image)
-        # cv.waitKey(1)
+        cv.imshow("Fittest Species", fittest.image)
+        cv.waitKey(1)
         counter+= 1
         # tracker.print_diff()
     cv.imshow("Source", fittest.image)

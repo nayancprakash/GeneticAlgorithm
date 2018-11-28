@@ -10,6 +10,7 @@ def crossover(pop):
             if i != j:
                 child = cross(pop[i],pop[j])
                 mating.append(child)
+    mating.pop()
     return mating
 
 def cross(parent1, parent2):

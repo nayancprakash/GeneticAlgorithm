@@ -13,7 +13,7 @@ class Species:
         self.image = numpy.zeros((height, width, 3))
         for shape in self.shapes:
             self.image = shape.drawShape(self.image)
-
+git
     # def drawSpecies(self):
     #     for shape in self.shapes:
     #         self.image = shape.drawShape(self.image)
