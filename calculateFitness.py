@@ -9,10 +9,12 @@ def calculateFitness(population, img):
     for species in population:
         # species.drawSpecies()
         fitness = 0
-        deltaB = img[:][:][0] - species.image[:][:][0]
-        deltaG = img[:][:][1] - species.image[:][:][1]
-        deltaR = img[:][:][2] - species.image[:][:][2]
-        fitness = deltaB*deltaB + deltaG*deltaG + deltaR*deltaR
+        delta = img - species.image
+        # deltaB = img[:][:][0] - species.image[:][:][0]
+        # deltaG = img[:][:][1] - species.image[:][:][1]
+        # deltaR = img[:][:][2] - species.image[:][:][2]
+        # fitness = deltaB*deltaB + deltaG*deltaG + deltaR*deltaR
+        fitness = delta*delta
         fitness = numpy.sum(fitness)
         #for y in range(species.image.shape[0]):
             #for x in range(species.image.shape[1]):

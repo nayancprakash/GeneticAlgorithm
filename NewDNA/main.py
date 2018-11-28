@@ -3,23 +3,23 @@ import cv2 as cv
 import numpy
 import species
 from sys import argv
-
+sourceImage = cv.imread(argv[1])
+height, width, depth = sourceImage.shape
+amountShapes = 150
+amountSpecies = 20
+amountVertices = 3
+polyRadius = 150
+cutoff = 15
+mutationRate = 10/100
+mutationChange =10
+dnaLength = 4 + amountVertices*2 #BGRA + Vertices
+strandLength = dnaLength*amountShapes
+population = []
+drawing = []
+fitnessArray = []
+maxerror = ((width*height*255)^2)*3
 if __name__ == "__main__":
-    sourceImage = cv.imread(argv[1])
-    height, width, depth = sourceImage.shape
-    amountShapes = 150
-    amountSpecies = 20
-    amountVertices = 3
-    polyRadius = 150
-    cutoff = 15
-    mutationRate = 10/100
-    mutationChange =10
-    dnaLength = 4 + amountVertices*2 #BGRA + Vertices
-    strandLength = dnaLength*amountShapes
-    population = []
-    drawing = []
-    fitnessArray = []
-    maxerror = ((width*height*255)^2)*3
+
 
 
     def CreateSpecies():
@@ -70,20 +70,34 @@ if __name__ == "__main__":
             shapePoints.append(point)
             i+=1
 
-        overlay = numpy.zeros((height, width, 3))
+        overlagity = numpy.zeros((height, width, 3))
         buff = numpy.array(shapePoints,)
         cv.fillPoly(overlay, numpy.int32([buff]), (B, G, R))
         img = img + overlay*A
         return img
 
     def CalculateFit(img):
-        deltaB = sourceImage[:][:][0] - img[:][:][0]
-        deltaG = sourceImage[:][:][1] - img[:][:][1]
-        deltaR = sourceImage[:][:][2] - img[:][:][2]
-        fitness = deltaB * deltaB + deltaG * deltaG + deltaR * deltaR
+        #print(sourceImage)
+        #print(img)
+        #print(img.shape)
+        #print("hi")
+        #print(sourceImage.shape)
+        delta = sourceImage - (img*255)
+        #print(delta.shape)
+        #deltaB = delta[0][:][:][0]
+        #deltaB = (sourceImage[0][:][:] - img[0][:][:])
+        #print(deltaB)
+        #print(deltaB.shape)
+        #deltaG = sourceImage[:][:][1] - img[:][:][1]
+        #print(deltaG)
+        #deltaR = sourceImage[:][:][2] - img[:][:][2]
+        #print(deltaR)
+        #fitness = deltaB * deltaB + deltaG * deltaG + deltaR * deltaR
+        fitness = delta*delta
         fitness = numpy.sum(fitness)
+        #print(fitness)
 
-        fitness = 1 -(fitness/maxerror)
+        #fitness = 1 -(fitness/maxerror)
 
         return fitness
 
@@ -97,7 +111,7 @@ if __name__ == "__main__":
     # cv.waitKey(0)
     counter =0
     while(counter <100):
-        population = sorted(population, key=lambda x: x.fitness, reverse=True)
+        population = sorted(population, key=lambda x: x.fitness, reverse=False)
         print("Generation: %i Fitness: %f" % (counter, population[0].fitness))
         # cv.imshow("Fittest Species", population[0].image)
         # cv.waitKey(0)

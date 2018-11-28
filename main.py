@@ -43,7 +43,7 @@ if __name__ == "__main__":
         speciesFitness, fittest = calculateFitness(population, sourceImage)
         # end = time.time()
         # print(start-end)
-        population = sorted(population, key=lambda x: x.fitness, reverse=True)
+        population = sorted(population, key=lambda x: x.fitness, reverse=False)
 
         print("Generation: %i Fitness: %f" % (counter,fittest.fitness))
         cv.imshow("Fittest Species", population[0].image)

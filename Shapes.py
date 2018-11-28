@@ -18,7 +18,7 @@ class Shapes:
             if i == 0:
                 pointsList.append([xAnchor, yAnchor])
             else:
-                pointsList.append([xAnchor+random.randint(int(-width/5),int(width/5)), yAnchor+random.randint(int(-height/5),int(height/5))])
+                pointsList.append([xAnchor+random.randint(int(-width/3),int(width/3)), yAnchor+random.randint(int(-height/3),int(height/3))])
         self.points = pointsList
         # Given in BGR Form
         self.color = [random.randint(0,256), random.randint(0,256), random.randint(0,256)]
