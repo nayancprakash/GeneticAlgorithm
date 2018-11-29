@@ -11,8 +11,13 @@ class Species:
         self.height = height
         self.width = width
         self.image = numpy.zeros((height, width, 3))
+        self.shapebuff =[]
         for shape in self.shapes:
-            self.image = shape.drawShape(self.image)
+            # self.shapebuff.append(shape.drawShape(self.image, len(self.shapes)))
+            self.image = shape.drawShape(self.image, len(self.shapes))
+        # for i in self.shapebuff:
+        #     self.image += i
+
 
     # def drawSpecies(self):
     #     for shape in self.shapes:

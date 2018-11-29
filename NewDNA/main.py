@@ -70,7 +70,7 @@ if __name__ == "__main__":
             shapePoints.append(point)
             i+=1
 
-        overlagity = numpy.zeros((height, width, 3))
+        overlay = numpy.zeros((height, width, 3))
         buff = numpy.array(shapePoints,)
         cv.fillPoly(overlay, numpy.int32([buff]), (B, G, R))
         img = img + overlay*A

@@ -17,10 +17,10 @@ from sys import argv
 if __name__ == "__main__":
     # Parameters
     sourceImage = cv.imread(argv[1])
-    amountSpecies = 45
-    amountShapes = 135
+    amountSpecies = 42
+    amountShapes = 125
     randAlpha = 5 # in percentage
-    amountFit = 5
+    amountFit = 7
     mutationRate = 1 # in percentage
     numVertices = 3
     mutationAmount = 10 # in percentage
@@ -28,6 +28,9 @@ if __name__ == "__main__":
     maxErr = (((width*height*255)^2)*3)
 
     population = Genesis.runGenesis(amountSpecies, amountShapes, height, width, randAlpha, numVertices)
+    # for i in population:
+    #     cv.imshow('lol',i.image)
+    #     cv.waitKey(0)
 
     counter = 0
     evolve = True
@@ -39,11 +42,9 @@ if __name__ == "__main__":
 
         speciesFitness = None
         speciesFitness = []
-        # start = time.time()
-        speciesFitness, fittest = calculateFitness(population, sourceImage)
-        # end = time.time()
-        # print(start-end)
+        calculateFitness(population, sourceImage)
         population = sorted(population, key=lambda x: x.fitness, reverse=False)
+        fittest = population[0]
 
         print("Generation: %i Fitness: %f" % (counter,fittest.fitness))
         cv.imshow("Fittest Species", population[0].image)

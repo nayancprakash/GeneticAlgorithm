@@ -10,24 +10,25 @@ class Shapes:
 
     def __init__(self, height, width, randAlpha, numVertices):
         #self.alpha = random.random() * random.random()
-        self.alpha = 0.02
+        self.alpha = random.randint(0,4)/30
         pointsList = []
-        xAnchor = random.randint(0,width+1)
-        yAnchor = random.randint(0,height+1)
+        polyradiusscale = 2
+        xAnchor = round(random.uniform(0,width+1))
+        yAnchor = round(random.uniform(0,height+1))
         for i in range(0, numVertices):
             if i == 0:
                 pointsList.append([xAnchor, yAnchor])
             else:
-                pointsList.append([xAnchor+random.randint(int(-width/3),int(width/3)), yAnchor+random.randint(int(-height/3),int(height/3))])
+                pointsList.append([xAnchor+random.randint(int(-width/polyradiusscale),int(width/polyradiusscale)), yAnchor+random.randint(int(-height/polyradiusscale),int(height/polyradiusscale))])
         self.points = pointsList
         # Given in BGR Form
-        self.color = [random.randint(0,256), random.randint(0,256), random.randint(0,256)]
+        self.color = [random.randint(0,255), random.randint(0,255), random.randint(0,255)]
 
-    def drawShape(self, img):
+    def drawShape(self, img,numberShapes):
         height, width, depth = img.shape
         overlay = numpy.zeros((height, width, 3))
         cv.fillPoly(overlay, [numpy.array(self.points)], (self.color[0], self.color[1], self.color[2]))
-        img = img*(1-self.alpha)+overlay*self.alpha
+        img = img*(1) + (overlay*self.alpha)/numberShapes
         return img
 
     def smallMutate(self, height, width):
@@ -35,20 +36,21 @@ class Shapes:
 
         #Add or subtract vertice
         if (randInt % 2 == 0):
-            self.points.append([random.randint(0,width+1), random.randint(0,height+1)])
+            # self.points.append([random.randint(0,width+1), random.randint(0,height+1)])
+            pass
         else:
             if len(self.points) != 3:
                 del (self.points[-1])
         #Add or subtract to alpha
-        self.alpha += random.randint(-10,10)
+        self.alpha += random.randint(-10,10)/100000
         if self.alpha < 0:
             self.alpha = 0
         elif self.  alpha > 1:
             self.alpha = 1
         #Add or subtract to colour
-        self.color[0] += random.randint(-20, 20)
-        self.color[1] += random.randint(-20, 20)
-        self.color[2] += random.randint(-20, 20)
+        self.color[0] += random.randint(-5, 5)
+        self.color[1] += random.randint(-5, 5)
+        self.color[2] += random.randint(-5, 5)
         for i in range(0, 3):
             if self.color[i] < 0:
                 self.color[i] = 0
