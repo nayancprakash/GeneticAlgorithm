@@ -7,7 +7,7 @@ class Species:
 
     def __init__(self, Shapes, height, width):
         self.shapes = Shapes;
-        self.image = Image.new("RGBA", (width, height), (0, 0, 0, 255))
+        self.image = Image.new("RGB", (width, height), (0, 0, 0))
         self.drawSpecies()
         self.fitness = 0;
         self.height = height

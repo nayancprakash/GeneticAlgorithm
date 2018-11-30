@@ -1,7 +1,8 @@
 import random
 
+
 def mutate(population, mutationRate, mutationAmount):
-    height, width, depth = population[0].image.shape
+    width, height = population[0].image.size
     mutatedSpecies = []
     for i in range(0, len(population)):
         # genes = species.shapes

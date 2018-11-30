@@ -12,7 +12,7 @@ from mutate import mutate
 if __name__ == "__main__":
     sourceImage = Image.open(argv[1])
     amountSpecies = 30
-    amountShapes = 300
+    amountShapes = 100
     amountVertices = 3
     amountFit = 15
     mutationRate = 0.02
@@ -42,6 +42,6 @@ if __name__ == "__main__":
         #cv.imshow("Source", population[0].image)
         #cv.waitKey(1)
         population = crossover(population[0:amountFit], amountFit)
-        #population = mutate(population, mutationRate, mutationAmount)
+        population = mutate(population, mutationRate, mutationAmount)
         population.append(fittest)
         counter += 1
