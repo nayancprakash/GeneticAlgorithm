@@ -12,7 +12,7 @@ from mutate import mutate
 if __name__ == "__main__":
     sourceImage = Image.open(argv[1])
     amountSpecies = 30
-    amountShapes = 50
+    amountShapes = 300
     amountVertices = 3
     amountFit = 15
     mutationRate = 0.02
@@ -26,7 +26,8 @@ if __name__ == "__main__":
     population = runGenesis(amountSpecies, amountShapes, height, width, amountVertices)
     evolve = True
     counter = 0
-    Image.fromarray(population[0].image).show()
+    population[0].image.show()
+    #Image.fromarray(population[0].image).show()
     #Image.fromarray(population[0].image).show()
     #for species in population:
         # Image.fromarray(species.image).show()
@@ -36,7 +37,8 @@ if __name__ == "__main__":
         fittest = population[0]
         print("Generation: %i Fitness: %i" % (counter, fittest.fitness))
         print(population[len(population)-1].fitness)
-        Image.fromarray(population[0].image).show()
+        population[0].image.show()
+        #Image.fromarray(population[0].image).show()
         #cv.imshow("Source", population[0].image)
         #cv.waitKey(1)
         population = crossover(population[0:amountFit], amountFit)
