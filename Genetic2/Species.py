@@ -14,8 +14,6 @@ class Species:
         self.width = width
 
     def drawSpecies(self):
-        maskList = []
         for shape in self.shapes:
-            #self.image = shape.drawShape(self.image)
-            maskList.append(shape.drawShape(self.image))
-        self.image = numpy.mean(maskList, axis=0).astype(numpy.uint8)*150
+            #self.image += (shape.drawShape(self.image)/len(self.shapes))
+            self.image += (shape.drawShape(self.image))/len(self.shapes)

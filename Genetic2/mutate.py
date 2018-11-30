@@ -21,14 +21,14 @@ def mutate(population, mutationRate, mutationAmount):
                     population[i].shapes[j].points[k][0] += negOrPos1*round(population[i].shapes[j].points[k][0]*mutationAmount)
                     population[i].shapes[j].points[k][1] += negOrPos2*round(population[i].shapes[j].points[k][1]*mutationAmount)
                     break
-            # if random.random() < mutationRate:
-            #     negOrPos = random.choice([-1, 1])
-            #     population[i].shapes[j].alpha += negOrPos*population[i].shapes[j].alpha * mutationAmount
-            #     if population[i].shapes[j].alpha < 0:
-            #         population[i].shapes[j].alpha = 0.1;
-            #     if population[i].shapes[j].alpha > 1:
-            #         population[i].shapes[j].alpha = 1;
-            #         break
+            if random.random() < mutationRate:
+                negOrPos = random.choice([-1, 1])
+                population[i].shapes[j].alpha += negOrPos*population[i].shapes[j].alpha * mutationAmount
+                if population[i].shapes[j].alpha < 0:
+                    population[i].shapes[j].alpha = 0.1;
+                if population[i].shapes[j].alpha > 1:
+                    population[i].shapes[j].alpha = 1;
+                    break
             for k in range(0, len(population[i].shapes[j].color)):
                 if random.random() < mutationRate:
                     negOrPos = random.choice([-1, 1])
