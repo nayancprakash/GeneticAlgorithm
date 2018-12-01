@@ -14,7 +14,9 @@ def breed(parent1, parent2):
     genes = []
     for i in range(0, len(parent1.shapes)):
         if random.random() < 0.5:
-            genes.append(random.choice(parent1.shapes))
+            genes.append(parent1.shapes[i])
+            #genes.append(random.choice(parent1.shapes))
         else:
-            genes.append(random.choice(parent2.shapes))
+            genes.append(parent2.shapes[i])
+            #genes.append(random.choice(parent2.shapes))
     return Species.Species(genes, parent1.height, parent1.width)

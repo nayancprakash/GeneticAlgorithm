@@ -13,14 +13,19 @@ class Shapes:
             pointsList.append((xAnchor + random.randint(round(-1*width/2), round(width/2)), yAnchor + random.randint(round(-1*height/2), round(height/2))))
 
         self.points = pointsList
-        self.color = (random.randint(0,256), random.randint(0,256), random.randint(0,256), random.randint(0, 256))
+        self.a = random.randint(0, 200)
+        self.b = random.randint(0, 255)
+        self.g= random.randint(0, 255)
+        self.r = random.randint(0, 255)
+
+        self.color = (random.randint(0,256), random.randint(0,256), random.randint(0,256), random.randint(0, 200))
 
     def drawShape(self, img):
         width, height = img.size
         #overlay = numpy.zeros((height, width, 4))
         canvas = Image.new("RGBA", (width, height), (0, 0, 0, 0))
         painting = ImageDraw.Draw(canvas)
-        painting.polygon(self.points, self.color, self.color)
+        painting.polygon(self.points, (self.r,self.g,self.b,self.a), (self.r,self.g,self.b,self.a))
         img.paste(canvas, canvas)
         return img
         #overlay1 = Image.fromarray(overlay, "RGBA")
